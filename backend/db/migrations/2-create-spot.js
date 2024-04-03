@@ -18,7 +18,7 @@ module.exports = {
         ownerId: {
           type: Sequelize.INTEGER,
           references: {
-            model: 'Users', 
+            model: 'Users',
             key: 'id',
           },
           onUpdate: 'CASCADE',
@@ -80,3 +80,4 @@ module.exports = {
     return queryInterface.dropTable(options);
   },
 };
+
