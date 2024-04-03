@@ -16,11 +16,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       spotId: {
-        allowNull: false, //  uncommented if every image must be linked to a spot
+        allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Spots', key: 'id' },
-        onUpdate: 'CASCADE', // Consider adding onUpdate and onDelete behavior if needed
-        onDelete: 'SET NULL' // or 'CASCADE' depending on want to handle deletion of a Spot
+        references: { model: 'Spots', key: 'id' }, // Ensure 'Spots' table exists
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       url: {
         allowNull: false,
@@ -41,9 +41,21 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    // Add the foreign key constraint separately after ensuring 'Spots' table exists
+    await queryInterface.addConstraint('SpotImages', {
+      type: 'foreign key',
+      fields: ['spotId'],
+      references: {
+        table: 'Spots',
+        field: 'id'
+      },
+      onDelete: 'SET NULL'
+    });
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = `SpotImages`;
+    // Drop the foreign key constraint before dropping the table
+    await queryInterface.removeConstraint('SpotImages', 'spotId');
     await queryInterface.dropTable('SpotImages');
   }
 };
