@@ -11,8 +11,18 @@
     "start": "npm start --prefix backend",
     "build": "npm run --prefix backend build"
   },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lizdiaz1/VacaVilla"
+  },
+
   "keywords": [],
   "author": "",
-  "license": "ISC"
- 
+  "license": "ISC",
+
+  "bugs": {
+    "url": "https://github.com/Lizdiaz1/VacaVilla/issues"
+  }
+
 }
